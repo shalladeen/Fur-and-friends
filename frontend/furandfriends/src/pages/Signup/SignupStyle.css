@@ -1,114 +1,112 @@
 /* 🔹 Centered Signup/Login Page */
 .auth-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding-top: 5em;
-}
-
-/* 🔹 Form Box */
-.auth-box {
-  background: #EDEDED; /* Light Gray for contrast */
-  padding: 2em;
-  border-radius: 0.9375em; /* 15px */
-  box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1); /* 0px 4px 10px */
-  width: 21.875em; /* 350px */
-  text-align: center;
-}
-
-/* 🔹 Title Styling */
-.auth-box h2 {
-  margin-bottom: 0.625em; /* 10px */
-  font-size: 1.8em;
-}
-
-/* 🔹 Social Login Section */
-.social-login p {
-  margin-top: 0.625em; /* 10px */
-  font-weight: bold;
-}
-
-/* 🔹 Social Buttons */
-.social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 0.625em; /* 10px */
-  margin: 0.9375em 0; /* 15px */
-}
-
-.google-btn, .facebook-btn, .apple-btn {
-  background: white;
-  border: none;
-  width: 3.125em; /* 50px */
-  height: 3.125em; /* 50px */
-  border-radius: 50%;
-  font-size: 1.5em;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
-
-/* 🔹 Social Button Hover Effects */
-.google-btn:hover { background: #5A8FC7; color: white; } /* Soft Blue */
-.facebook-btn:hover { background: #E8A87C; color: white; } /* Light Orange */
-.apple-btn:hover { background: #79A57D; color: white; } /* Soft Green */
-
-/* 🔹 Divider Line */
-.divider {
-  margin: 0.9375em 0; /* 15px */
-  font-weight: bold;
-  color: #3D3D3D;
-}
-
-/* 🔹 Form Fields */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625em; /* 10px */
-}
-
-input, select {
-  width: 100%;
-  padding: 0.625em; /* 10px */
-  border: 0.0625em solid #ccc; /* 1px */
-  border-radius: 0.5em; /* 8px */
-  font-size: 1rem;
-}
-
-/* 🔹 Primary Buttons */
-button {
-  width: 100%;
-  padding: 0.75em; /* 12px */
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 0.5em; /* 8px */
-  margin-top: 0.625em; /* 10px */
-  transition: background 0.2s ease-in-out;
-}
-
-button[type="submit"] {
-  background: #5A8FC7; /* Soft Blue */
-  color: white;
-}
-
-button[type="submit"]:hover {
-  background: #4B7BA7;
-}
-
-/* 🔹 Toggle Between Signup & Login */
-.toggle-text {
-  margin-top: 0.625em; /* 10px */
-}
-
-.toggle-btn {
-  background: none;
-  border: none;
-  color: #5A8FC7;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.toggle-btn:hover {
-  text-decoration: underline;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* 🔹 Form Box */
+  .auth-box {
+    background: #EDEDED; /* Light Gray for contrast */
+    padding: 2rem;
+    border-radius: 15px; /* Soft rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+  }
+  
+  /* 🔹 Title Styling */
+  .auth-box h2 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+  }
+  
+  /* 🔹 Social Login Section */
+  .social-login p {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .google-btn, .facebook-btn, .apple-btn {
+    background: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  /* 🔹 Social Button Hover Effects */
+  .google-btn:hover { background: #5A8FC7; color: white; } /* Soft Blue */
+  .facebook-btn:hover { background: #E8A87C; color: white; } /* Light Orange */
+  .apple-btn:hover { background: #79A57D; color: white; } /* Soft Green */
+  
+  /* 🔹 Divider Line */
+  .divider {
+    margin: 15px 0;
+    font-weight: bold;
+    color: #3D3D3D;
+  }
+  
+  /* 🔹 Form Fields */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  /* 🔹 Primary Buttons */
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  button[type="submit"] {
+    background: #5A8FC7; /* Soft Blue */
+    color: white;
+  }
+  
+  button[type="submit"]:hover {
+    background: #4B7BA7;
+  }
+  
+  /* 🔹 Toggle Between Signup & Login */
+  .toggle-text {
+    margin-top: 10px;
+  }
+  
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: #5A8FC7;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .toggle-btn:hover {
+    text-decoration: underline;
+  }
