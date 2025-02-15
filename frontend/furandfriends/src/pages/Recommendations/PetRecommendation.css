@@ -99,6 +99,7 @@ body {
     width: 100%;
     height: 200px; /* Fixed height for consistency */
     object-fit: cover; /* Ensures the image covers the area without distortion */
+    object-position: top; /* Focus on the upper half of the image */
     border-radius: 0.5em;
     margin-bottom: 1em;
   }
