@@ -2,54 +2,78 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #5A8FC7;
-    color: #3D3D3D;
-    padding: 1rem;
+    background-color: #5a8fc7;
+    color: #3d3d3d;
+    padding: 0.5rem 1rem;
+    height: 60px;
+    font-weight: 700;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #3d3d3d; 
   }
   
   .navbar-left .logo {
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: bold;
-    color: #fff;
     text-decoration: none;
+    display: flex;
+    align-items: center;
   }
   
-  .navbar-center .nav-links {
+  .navbar-left .logo img {
+    height: 100px;
+    width: auto;
+    margin-right: 1rem;
+    margin-left: 0;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-center .nav-links,
+  .navbar-right {
     list-style-type: none;
     display: flex;
     margin: 0;
     padding: 0;
   }
   
-  .navbar-center .nav-links li {
+  .navbar-center .nav-links li,
+  .navbar-right {
     margin-right: 1rem;
   }
   
-  .navbar-center .nav-links a {
-    color: #3D3D3D;
+  .navbar-center .nav-links a,
+  .navbar-right a {
+    color: #3d3d3d;
     text-decoration: none;
-  }
-  
-  .navbar-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-right .cart-icon,
-  .navbar-right .user-icon {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 1rem;
     position: relative;
+    padding-bottom: 5px;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
   }
   
-  .navbar-right .cart-count {
-    background-color: #f44336;
-    color: #fff;
-    border-radius: 50%;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.8rem;
+  .navbar-center .nav-links a::after,
+  .navbar-right a::after {
+    content: "";
     position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s ease;
+  }
+  
+  .navbar-center .nav-links a:hover::after,
+  .navbar-right a:hover::after {
+    width: 100%;
   }

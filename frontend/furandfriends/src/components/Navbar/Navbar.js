@@ -1,45 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../Navbar/Navbar.css'
+import '../Navbar/Navbar.css';
+import logo from '../Images/Logo.png';
 
 const Navbar = () => {
   return (
-
-<nav className="navbar">
-  <div className="navbar-left">
-    <a href="/" className="logo">
-      Fur and Friends
-    </a>
-  </div>
-  <div className="navbar-center">
-    <ul className="nav-links">
-      
-      <li>
-        <a href="/welcome-elderly">Home</a>
-      </li>
-        <li>
-            <a href="/connect">Connect</a>
-        </li>
-      <li>
-        <a href="/volunteer-form">Volunteer</a>
-      </li>
-      <li>
-        <a href="/signup">Sign Up</a>
-      </li>
-    </ul>
-  </div>
-  <div className="navbar-right">
-    <a href="/cart" className="cart-icon">
-      <i className="fas fa-shopping-cart"></i>
-      <span className="cart-count">0</span>
-    </a>
-    <a href="/account" className="user-icon">
-      <i className="fas fa-user"></i>
-    </a>
-  </div>
-</nav>
-);
+    <nav className="navbar">
+      <div className="navbar-left">
+        <Link to="/" className="logo">
+          <img src={logo} alt="Fur and Friends Logo" className="logo-img" />
+        </Link>
+        <span className="logo-text">Fur and Friends</span>
+      </div>
+      <div className="navbar-center">
+        <ul className="nav-links">
+          <li>
+            <Link to="/Connect" className="button-link">Connect</Link>
+          </li>
+          <li>
+            <Link to="/Volunteer" className="button-link">Volunteer</Link>
+          </li>
+          <li>
+            <Link to="/Contact" className="button-link">Contact</Link>
+          </li>
+        </ul>
+      </div>
+      <div className="navbar-right">
+        <Link to="/signup" className="button-link">
+          Sign Up / Login
+        </Link>
+      </div>
+    </nav>
+  );
 };
-
 
 export default Navbar;
