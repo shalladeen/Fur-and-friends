@@ -11,14 +11,14 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log("Updated Form Data:", formData); // Log form changes
+    console.log("Updated Form Data:", formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    console.log("Submitting Form Data:", formData); // Log final form data before sending
+    console.log("Submitting Form Data:", formData);
 
     if (!formData.email || !formData.password || !formData.name || !formData.role) {
       setError('All fields are required');
@@ -82,6 +82,14 @@ const Signup = () => {
 
           <button type="submit">Sign Up</button>
         </form>
+
+        {/* Login Redirect Button */}
+        <p className="toggle-text">
+          Already have an account?
+          <button onClick={() => navigate('/login')} className="toggle-btn">
+            Login
+          </button>
+        </p>
       </div>
     </div>
   );
