@@ -1,0 +1,109 @@
+/* 🔹 Centering Form */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f8f1e4; /* Light Warm Beige */
+  padding: 20px;
+}
+
+/* 🔹 Form Box */
+.contact-box {
+  max-width: 500px;
+  background: #ededed; /* Light Gray */
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 🔹 Contact Header */
+.contact-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between icon and text */
+  margin-bottom: 10px;
+}
+
+.contact-header h2 {
+  font-size: 2rem;
+  color: #3d3d3d;
+  margin: 0; /* Remove default margin */
+}
+
+/* 🔹 Icon Container */
+.icon-container {
+  position: relative;
+  width: 70px; /* Adjust to match icon size */
+  height: 70px; /* Adjust to match icon size */
+}
+
+/* 🔹 Custom Paw Letter Icon */
+.paw-letter-icon {
+  width: 70px; /* Adjust size as needed */
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Closed Icon (visible by default) */
+.closed-icon {
+  opacity: 1;
+}
+
+/* Open Icon (hidden by default) */
+.open-icon {
+  opacity: 0;
+}
+
+/* Hover Effect: Swap Icons */
+.icon-container:hover .closed-icon {
+  opacity: 0;
+}
+
+.icon-container:hover .open-icon {
+  opacity: 1;
+}
+
+/* 🔹 Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* 🔹 Submit Button */
+button {
+  background: #5a8fc7; /* Soft Blue */
+  color: white;
+  padding: 12px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #4b7ba7; /* Darker Blue on Hover */
+}
