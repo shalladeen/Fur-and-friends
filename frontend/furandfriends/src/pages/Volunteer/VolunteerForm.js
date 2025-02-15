@@ -135,7 +135,7 @@ const VolunteerForm = () => {
 
           <label>Availability:</label>
           <div className="availability-days">
-            <p>Select Available Days:</p>
+            
             {daysOfWeek.map((day) => (
               <label key={day}>
                 <input type="checkbox" value={day} onChange={handleDaySelection} />
