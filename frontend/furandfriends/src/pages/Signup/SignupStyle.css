@@ -10,7 +10,7 @@
   
   /* 🔹 Form Box */
   .auth-box {
-    background: #EDEDED; /* Light Gray for contrast */
+    background: #f5fcff; /* Light Gray for contrast */
     padding: 2rem;
     border-radius: 15px; /* Soft rounded corners */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -38,7 +38,7 @@
   }
   
   .google-btn, .facebook-btn, .apple-btn {
-    background: white;
+    background: rgb(202, 135, 135);
     border: none;
     width: 50px;
     height: 50px;

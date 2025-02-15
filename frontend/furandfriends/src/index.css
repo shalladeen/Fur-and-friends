@@ -1,9 +1,7 @@
 /* 🔹 Global Reset & Font Setup */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  background-color: #F8F1E4; /* Light Warm Beige */
+  background-color: #ffffff; /* Light Warm Beige */
   color: #3D3D3D; /* Dark Gray for readability */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -120,8 +118,19 @@ a:hover {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Bungee', sans-serif;
+}
+
+
 
 /* Hover effects */
-.google-btn:hover { background: #5A8FC7; color: white; } /* Soft Blue */
-.facebook-btn:hover { background: #E8A87C; color: white; } /* Light Orange */
-.apple-btn:hover { background: #79A57D; color: white; } /* Soft Green */
+.google-btn:hover { background: #5A8FC7; color: black; } /* Soft Blue */
+.facebook-btn:hover { background: #E8A87C; color: black; } /* Light Orange */
+.apple-btn:hover { background: #79A57D; color: black; } /* Soft Green */
