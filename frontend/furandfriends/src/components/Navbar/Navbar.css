@@ -1,214 +1,116 @@
-/* General styles */
-html {
-  block-size: 100%;
-  inline-size: 100%;
-}
-
-body {
-  min-block-size: 100%;
-  min-inline-size: 100%;
-  margin: 0;
-  box-sizing: border-box;
-  display: grid;
-  place-content: center;
-  font-family: system-ui, sans-serif;
-}
-
-@media (orientation: landscape) {
-  body {
-    grid-auto-flow: column;
-  }
-}
-
-/* Navbar container */
+/* General Navbar Styling */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #5a8fc7;
   color: #3d3d3d;
-  padding: 0.5rem 2rem; /* Increased right padding to prevent cut-off */
-  height: 60px;
-  font-weight: 700;
-  width: 100%; /* Ensure navbar spans full width */
-  position: fixed; /* Optional: Fix navbar to the top */
-  top: 0; /* Optional: Fix navbar to the top */
-  left: 0; /* Optional: Fix navbar to the top */
-  z-index: 1000; /* Optional: Ensure navbar stays above other content */
-  box-sizing: border-box; /* Ensure padding is included in width */
+  padding: 1em 1.5em;
+  height: 4em;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
-/* Left section (Logo and text) */
+/* Left Section (Logo) */
 .navbar-left {
   display: flex;
   align-items: center;
 }
 
-.navbar-left .logo {
-  font-size: 3rem;
-  font-weight: bold;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-
 .navbar-left .logo img {
-  height: 50px; /* Adjust logo size for mobile */
+  height: 2em;
   width: auto;
-  margin-right: 0.5rem;
-  margin-left: 0;
+  margin-right: 0.5em;
 }
 
-/* Logo text with animation */
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #3d3d3d;
-  position: relative;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.logo-text::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Adjust distance from text */
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #ffffff; /* Change to your desired underline color */
-  transition: width 0.5s ease; /* Adjust animation duration */
-}
-
-.logo-text:hover::after {
-  width: 100%; /* Extend the underline on hover */
-}
-
-/* Center section (Navigation links) */
-.navbar-center .nav-links {
-  list-style-type: none;
+/* Center Section (Nav Links) */
+.nav-links {
+  list-style: none;
   display: flex;
+  gap: 1.5em;
   margin: 0;
   padding: 0;
 }
 
-.navbar-center .nav-links li {
-  margin-right: 1rem;
-}
-
-.navbar-center .nav-links a {
+.nav-links li a {
   color: #3d3d3d;
   text-decoration: none;
-  position: relative;
-  padding-bottom: 5px;
-  display: inline-block;
-  font-size: 1.2rem;
+  font-size: 1em;
   font-weight: 700;
-  cursor: pointer;
 }
 
-.navbar-center .nav-links a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #ffffff; /* Change to your desired underline color */
-  transition: width 0.3s ease;
-}
-
-.navbar-center .nav-links a:hover::after {
-  width: 100%;
-}
-
-/* Right section (Sign Up / Login) */
+/* Right Section (Sign Up/Login) */
 .navbar-right {
-  list-style-type: none;
   display: flex;
-  margin: 0;
-  padding: 0;
 }
 
 .navbar-right a {
   color: #3d3d3d;
   text-decoration: none;
-  position: relative;
-  padding: 0.5rem 1rem; /* Added padding for better spacing */
-  display: inline-block;
-  font-size: 1.2rem;
+  font-size: 1em;
   font-weight: 700;
+}
+
+/* 🔹 HAMBURGER MENU (Mobile) */
+.menu-icon {
+  display: none;
+  font-size: 2em;
   cursor: pointer;
-  white-space: nowrap; /* Prevent text from wrapping */
-}
-
-.navbar-right a::after {
-  content: "";
+  color: #3d3d3d;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #ffffff; /* Change to your desired underline color */
-  transition: width 0.3s ease;
+  right: 1.2em;
+  top: 50%;  /* Adjusting position */
+  transform: translateY(-50%); /* Centers the icon vertically */
 }
 
-.navbar-right a:hover::after {
-  width: 100%;
-}
-
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
-  /* Adjust layout for smaller screens */
-  .navbar {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
+  /* Hide regular nav links & show menu icon */
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 4em;
+      left: 0;
+      width: 100%;
+      background: #5a8fc7;
+      text-align: center;
+      padding: 1em 0;
   }
 
-  .navbar-left,
-  .navbar-center,
-  .navbar-right {
-    width: 100%;
-    justify-content: center;
-    margin: 0.5rem 0;
+  .nav-links.active {
+      display: flex;
   }
 
-  .navbar-left .logo img {
-    height: 40px; /* Smaller logo for mobile */
+  .nav-links li {
+      padding: 1em 0;
   }
 
-  .logo-text {
-    font-size: 1.2rem; /* Smaller text for mobile */
+  .menu-icon {
+      display: block;
+      right: 1em;
+      top: 50%;  /* Keep icon vertically centered */
+      transform: translateY(-50%);
   }
 
-  .navbar-center .nav-links {
-    flex-direction: column;
-    align-items: center;
+  /* Hide Sign Up/Login in navbar on mobile */
+  .desktop-signup {
+      display: none;
   }
 
-  .navbar-center .nav-links li {
-    margin: 0.5rem 0;
-  }
-
-  .navbar-right {
-    justify-content: center;
+  /* Show Sign Up/Login inside the dropdown */
+  .mobile-signup {
+      display: block;
   }
 }
 
-@media (max-width: 480px) {
-  /* Further adjustments for very small screens */
-  .navbar-left .logo img {
-    height: 30px; /* Even smaller logo for very small screens */
-  }
-
-  .logo-text {
-    font-size: 1rem; /* Smaller text for very small screens */
-  }
-
-  .navbar-center .nav-links a,
-  .navbar-right a {
-    font-size: 1rem; /* Smaller font size for links */
+/* Hide mobile-only buttons on large screens */
+@media (min-width: 769px) {
+  .mobile-signup {
+      display: none;
   }
 }
