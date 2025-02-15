@@ -1,0 +1,51 @@
+/* 🔹 Centering the Home Page */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #F8F1E4; /* Light Warm Beige */
+    padding: 20px;
+  }
+  
+  /* 🔹 Home Content */
+  .home-content {
+    max-width: 600px;
+    background: #EDEDED; /* Light Gray Background */
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 🔹 Title */
+  .home-content h1 {
+    font-size: 2rem;
+    color: #3D3D3D; /* Dark Gray */
+    margin-bottom: 15px;
+  }
+  
+  /* 🔹 Description */
+  .home-content p {
+    font-size: 1.2rem;
+    color: #3D3D3D;
+    margin-bottom: 20px;
+  }
+  
+  /* 🔹 Get Started Button */
+  .get-started-btn {
+    background: #5A8FC7; /* Soft Blue */
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    display: inline-block;  /* Ensures it stays visible */
+    margin-top: 20px; /* Adds space between text and button */
+}
+  
+  .get-started-btn:hover {
+    background: #4B7BA7;
+  }
