@@ -1,156 +1,170 @@
-/* 🔹 Centering Content */
+/* :small_blue_diamond: Centering Content */
 .volunteer-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 3em 1.25em 1.25em;
-    margin-top: 2em; /* Adds space between navbar and page */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 3em 1.25em 1.25em;
+  margin-top: 2em; /* Adds space between navbar and page */
+}
+
+/* :small_blue_diamond: Content Box */
+.volunteer-box {
+  max-width: 40em;
+  padding: 2.5rem;
+  border-radius: 0.94em;
+  box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 0.0625em;
+}
+
+/* :small_blue_diamond: Title */
+.volunteer-box h1 {
+  font-size: 2rem;
+  color: #3D3D3D;
+  margin-bottom: 0.625em;
+}
+
+/* :small_blue_diamond: Description */
+.volunteer-box p {
+  font-size: 1rem;
+  color: #000000; /* Soft Blue */
+  margin-bottom: 1.25em;
+}
+
+/* :small_blue_diamond: Volunteer Grid */
+.volunteer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+/* :small_blue_diamond: Volunteer Card */
+.volunteer-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  padding: 20px;
+  width: 320px;
+}
+
+.volunteer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* :small_blue_diamond: Volunteer Image */
+.volunteer-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* :small_blue_diamond: Volunteer Info */
+.volunteer-info {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.volunteer-info h3 {
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.volunteer-info p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* :small_blue_diamond: Connect Button */
+.volunteer-button {
+  background: #5A8FC7;
+  color: white;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.volunteer-button:hover {
+  background: #4B7BA7;
+}
+
+/* :small_blue_diamond: No Results Message */
+.no-results {
+  font-size: 1.2rem;
+  color: red;
+  margin-top: 20px;
+}
+
+/* :small_blue_diamond: Responsive Design */
+@media (max-width: 768px) {
+  .volunteer-container {
+    padding: 15px;
   }
-  
-  /* 🔹 Content Box */
+
   .volunteer-box {
+<<<<<<< HEAD
+    max-width: 90%;
+    padding: 1.5rem;
+=======
     max-width: 40em;
     padding: 2.5rem;
     border-radius: 0.94em;
     box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-top: 0.0625em;
+>>>>>>> afe53a532e7e067dd6f2b21af8e7ef270ee911ed
   }
-  
-  /* 🔹 Title */
+
   .volunteer-box h1 {
-    font-size: 2rem;
-    color: #3D3D3D;
-    margin-bottom: 0.625em;
+    font-size: 1.8rem;
   }
-  
-  /* 🔹 Description */
+
   .volunteer-box p {
     font-size: 1rem;
+<<<<<<< HEAD
+=======
     color: #000000; /* Soft Blue */
     margin-bottom: 1.25em;
+>>>>>>> afe53a532e7e067dd6f2b21af8e7ef270ee911ed
   }
-  
-  /* 🔹 Volunteer Grid */
+
   .volunteer-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    max-width: 900px;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  /* 🔹 Volunteer Card */
+
   .volunteer-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    padding: 20px;
-    width: 320px;
+    width: 90%;
+    max-width: 400px;
   }
-  
-  .volunteer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* 🔹 Volunteer Image */
-  .volunteer-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  /* 🔹 Volunteer Info */
-  .volunteer-info {
-    margin-top: 15px;
-    text-align: center;
-  }
-  
+
   .volunteer-info h3 {
-    font-size: 1.6rem;
-    color: #333;
+    font-size: 1.4rem;
   }
-  
+
   .volunteer-info p {
     font-size: 1rem;
-    color: #555;
-    margin: 5px 0;
   }
-  
-  /* 🔹 Connect Button */
+
   .volunteer-button {
-    background: #5A8FC7;
-    color: white;
-    padding: 12px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-    width: 100%;
-    margin-top: 10px;
+    padding: 10px;
+    font-size: 1rem;
   }
-  
-  .volunteer-button:hover {
-    background: #4B7BA7;
-  }
-  
-  /* 🔹 No Results Message */
-  .no-results {
-    font-size: 1.2rem;
-    color: red;
-    margin-top: 20px;
-  }
-  
-  /* 🔹 Responsive Design */
-  @media (max-width: 768px) {
-    .volunteer-container {
-      padding: 15px;
-    }
-  
-    .volunteer-box {
-      max-width: 90%;
-      padding: 1.5rem;
-    }
-  
-    .volunteer-box h1 {
-      font-size: 1.8rem;
-    }
-  
-    .volunteer-box p {
-      font-size: 1rem;
-    }
-  
-    .volunteer-grid {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .volunteer-card {
-      width: 90%;
-      max-width: 400px;
-    }
-  
-    .volunteer-info h3 {
-      font-size: 1.4rem;
-    }
-  
-    .volunteer-info p {
-      font-size: 1rem;
-    }
-  
-    .volunteer-button {
-      padding: 10px;
-      font-size: 1rem;
-    }
-  }
+}
