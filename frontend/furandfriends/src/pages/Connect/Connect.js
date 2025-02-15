@@ -266,7 +266,7 @@ const Connect = () => {
     if (formData.companionType === 'volunteer') {
       navigate('/volunteer-recommendations', { state: formData });
     } else if (formData.companionType === 'pet') {
-      navigate('/pet-recommendations', { state: formData });
+      navigate('/Pet-Recommendation', { state: formData });
     }
   };
 
