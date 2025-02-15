@@ -10,7 +10,7 @@ const Navbar = () => {
         <Link to="/" className="logo">
           <img src={logo} alt="Fur and Friends Logo" className="logo-img" />
         </Link>
-        <span className="logo-text">Fur and Friends</span>
+        <span className="logo-text">Fur & Friends</span>
       </div>
       <div className="navbar-center">
         <ul className="nav-links">
