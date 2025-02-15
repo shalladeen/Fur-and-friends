@@ -13,14 +13,18 @@ const Navbar = () => {
   </div>
   <div className="navbar-center">
     <ul className="nav-links">
+      
+      <li>
+        <a href="/welcome-elderly">Home</a>
+      </li>
+        <li>
+            <a href="/connect">Connect</a>
+        </li>
+      <li>
+        <a href="/volunteer-form">Volunteer</a>
+      </li>
       <li>
         <a href="/signup">Sign Up</a>
-      </li>
-      <li>
-        <a href="/welcome-elderly">About Us</a>
-      </li>
-      <li>
-        <a href="/welcome-volunteer">Contact</a>
       </li>
     </ul>
   </div>

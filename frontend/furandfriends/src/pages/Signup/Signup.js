@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaGoogle, FaFacebook, FaApple } from 'react-icons/fa'; // Import icons
 import '../Signup/SignupStyle.css';
 
 const Signup = () => {
-  const [isLogin, setIsLogin] = useState(false); // Toggle between Signup & Login
+  const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '', name: '', role: '' });
   const navigate = useNavigate();
 
@@ -25,12 +26,13 @@ const Signup = () => {
       <div className="auth-box">
         <h2>{isLogin ? 'Welcome Back!' : 'Welcome to Fur & Friends!'}</h2>
 
+        {/* Social Login Section */}
         <div className="social-login">
           <p>{isLogin ? 'Login with one of these' : 'Sign up with one of these'}</p>
           <div className="social-buttons">
-            <button className="google-btn">G</button>
-            <button className="facebook-btn">F</button>
-            <button className="apple-btn"></button>
+            <button className="google-btn"><FaGoogle /></button>
+            <button className="facebook-btn"><FaFacebook /></button>
+            <button className="apple-btn"><FaApple /></button>
           </div>
         </div>
 
