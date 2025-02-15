@@ -57,35 +57,47 @@ mongoose.connect(process.env.DB_URI, {
     try {
       const { email, password } = req.body;
   
-      console.log("Login Request Data:", req.body);
+      if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required" });
+      }
+  
+      console.log("📩 Login Request Data:", req.body);
   
       const user = await User.findOne({ email });
+  
       if (!user) {
-        console.error("User not found:", email);
+        console.error("❌ User not found:", email);
         return res.status(400).json({ message: "User not found" });
       }
   
       if (!user.password) {
-        console.error("User record is missing a password field:", user);
+        console.error("⚠ User record is missing a password field:", user);
         return res.status(400).json({ message: "Password field missing, try resetting your password" });
       }
   
       const isValidPassword = await bcrypt.compare(password, user.password);
+  
       if (!isValidPassword) {
-        console.error("Invalid password for user:", email);
+        console.error("❌ Invalid password for user:", email);
         return res.status(400).json({ message: "Invalid password" });
       }
   
-      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign(
+        { id: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
   
-      console.log("Login Successful for:", user.email);
+      console.log("✅ Login Successful for:", user.email);
       res.json({ message: "Login successful", token });
   
     } catch (error) {
-      console.error("Error in Login:", error);
-      res.status(500).json({ message: "Server error", error });
+      console.error("🚨 Error in Login:", error);
+      res.status(500).json({ message: "Server error", error: error.message });
     }
   });
+  
+  
   
 
 
