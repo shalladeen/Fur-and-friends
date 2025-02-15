@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Signup from './pages/Signup';
+import ElderlyWelcome from '../src/pages/WelcomeElder';
+import VolunteerWelcome from '../src/pages/WelcomeVolunteer';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<ElderlyWelcome />} />  {/* ✅ Elderly page is now the default */}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/welcome-elderly" element={<ElderlyWelcome />} />
+        <Route path="/welcome-volunteer" element={<VolunteerWelcome />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
