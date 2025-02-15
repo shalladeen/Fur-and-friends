@@ -1,11 +1,12 @@
 /* 🔹 Centering Form */
 .volunteer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 3em 1.25em 1.25em;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 3em 1.25em 1.25em;
+  margin-top: 2em; /* Add space between navbar and form */
+}
   
   /* 🔹 Form Box */
   .volunteer-box {
