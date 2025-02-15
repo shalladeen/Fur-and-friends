@@ -6,6 +6,7 @@ import VolunteerForm from '../src/pages/Volunteer/VolunteerForm';
 import VolunteerPlus from '../src/pages/Volunteer/VolunteerPlus';
 import Connect from './pages/Connect/Connect';
 import Navbar from './components/Navbar/Navbar';
+import Login from './pages/Login/Login';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<ElderlyWelcome />} /> 
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/welcome-elderly" element={<ElderlyWelcome />} />
         <Route path="/volunteer-form" element={<VolunteerForm />} />
         <Route path="/volunteer-plus" element={<VolunteerPlus />} />
