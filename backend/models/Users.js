@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   age: Number,
-  email: String,
+  email: { type: String, required: true, unique: true },
+  role: { type: String, enum: ['elderly', 'volunteer'], required: true },
   interests: [String],
-  availability: {
-    days: [String],
-    times: [String]
-  },
+  availability: [String], 
   createdAt: { type: Date, default: Date.now }
 });
 
