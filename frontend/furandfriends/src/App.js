@@ -8,6 +8,7 @@ import Connect from './pages/Connect/Connect';
 import Navbar from './components/Navbar/Navbar';
 import Login from './pages/Login/Login';
 import Contact from './pages/Contact/Contact';
+import PetRecommendation from './pages/Recommendations/PetRecommendation';
 import './App.css'; 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/volunteer-plus" element={<VolunteerPlus />} />
           <Route path="/connect" element={<Connect />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/PetRecommendation" element={<PetRecommendation/>}/>
         </Routes>
       </div>
     </Router>
