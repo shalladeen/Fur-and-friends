@@ -21,10 +21,33 @@
   align-items: center;
 }
 
+.navbar-left .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .navbar-left .logo img {
   height: 4.5em;
   width: auto;
   margin-right: 0.5em;
+  transition: filter 0.3s ease, transform 0.3s ease; /* Add transition for glow effect */
+}
+
+.navbar-left .logo:hover img {
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)); /* Glow effect that hugs the logo */
+  transform: scale(1.05); /* Optional: Slightly enlarge the logo on hover */
+}
+
+.navbar-left .logo-text {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #3d3d3d;
+  transition: color 0.3s ease; /* Add hover effect */
+}
+
+.navbar-left .logo:hover .logo-text {
+  color: white; /* Highlight text on hover */
 }
 
 /* Center Section (Nav Links) */
@@ -41,21 +64,31 @@
   text-decoration: none;
   font-size: 1em;
   font-weight: 700;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-/* Right Section (Sign Up/Login) */
-.navbar-right {
-  display: flex;
+/* Animation for Nav Links */
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease;
 }
 
-.navbar-right a {
-  color: #3d3d3d;
-  text-decoration: none;
-  font-size: 1em;
-  font-weight: 700;
+.nav-links li a:hover::after {
+  width: 100%; /* Animate the white line from left to right */
 }
 
-/* 🔹 HAMBURGER MENU (Mobile) */
+.nav-links li a:hover {
+  color: white; /* Change text color on hover */
+}
+
+/* Hamburger Menu (Mobile) */
 .menu-icon {
   display: none;
   font-size: 2em;
@@ -63,54 +96,54 @@
   color: #3d3d3d;
   position: absolute;
   right: 1.2em;
-  top: 50%;  /* Adjusting position */
-  transform: translateY(-50%); /* Centers the icon vertically */
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   /* Hide regular nav links & show menu icon */
   .nav-links {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 4em;
-      left: 0;
-      width: 100%;
-      background: #5a8fc7;
-      text-align: center;
-      padding: 1em 0;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 4em;
+    left: 0;
+    width: 100%;
+    background: #5a8fc7;
+    text-align: center;
+    padding: 1em 0;
   }
 
   .nav-links.active {
-      display: flex;
+    display: flex;
   }
 
   .nav-links li {
-      padding: 1em 0;
+    padding: 1em 0;
   }
 
   .menu-icon {
-      display: block;
-      right: 1em;
-      top: 50%;  /* Keep icon vertically centered */
-      transform: translateY(-50%);
+    display: block;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   /* Hide Sign Up/Login in navbar on mobile */
   .desktop-signup {
-      display: none;
+    display: none;
   }
 
   /* Show Sign Up/Login inside the dropdown */
   .mobile-signup {
-      display: block;
+    display: block;
   }
 }
 
 /* Hide mobile-only buttons on large screens */
 @media (min-width: 769px) {
   .mobile-signup {
-      display: none;
+    display: none;
   }
 }
