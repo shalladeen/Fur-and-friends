@@ -28,13 +28,23 @@ const Navbar = () => {
 
       {/* Center Section (Nav Links) */}
       <ul className={menuOpen ? "nav-links active" : "nav-links"}>
-        <li><Link to="/Connect" className="button-link" onClick={() => setMenuOpen(false)}>Connect</Link></li>
-        <li><Link to="/Volunteer-form" className="button-link" onClick={() => setMenuOpen(false)}>Volunteer</Link></li>
-        <li><Link to="/Contact" className="button-link" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+        <li>
+          <Link to="/" className="button-link" onClick={() => setMenuOpen(false)}>Home</Link>
+        </li>
+        <li>
+          <Link to="/Connect" className="button-link" onClick={() => setMenuOpen(false)}>Connect</Link>
+        </li>
+        <li>
+          <Link to="/Volunteer-form" className="button-link" onClick={() => setMenuOpen(false)}>Volunteer</Link>
+        </li>
+        <li>
+          <Link to="/Contact" className="button-link" onClick={() => setMenuOpen(false)}>Contact</Link>
+        </li>
         {/* This Sign Up / Login button should ONLY be visible in the mobile menu */}
-        <li className="mobile-signup"><Link to="/signup" className="button-link" onClick={() => setMenuOpen(false)}>Sign Up / Login</Link></li>
+        <li className="mobile-signup">
+          <Link to="/signup" className="button-link" onClick={() => setMenuOpen(false)}>Sign Up / Login</Link>
+        </li>
       </ul>
-
     </nav>
   );
 };
