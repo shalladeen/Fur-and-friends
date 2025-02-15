@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
-const petSchema = new Schema({
+const petSchema = new mongoose.Schema({
   name: String,
   type: String,
   breed: String,
@@ -9,5 +8,4 @@ const petSchema = new Schema({
   availability: [String], // When the pet is available for elderly
 });
 
-const Pet = mongoose.model('Pet', petSchema);
-module.exports = Pet;
+module.exports = mongoose.model('Pets', petSchema);
