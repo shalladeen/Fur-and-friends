@@ -1,56 +1,57 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const Volunteer = require('../models/Volunteer');
-const Users = require('../models/Users');
-const { areInterestsSimilar } = require('../helpers/interestMatcher');  // ✅ Import the helper function
 
 const router = express.Router();
 
-// Helper Function: Get Similar Interests
-function getSimilarInterests(volunteerInterests, usersInterests) {
-  const similarInterests = [];
-  
-  volunteerInterests.forEach(volunteerInterest => {
-    usersInterests.forEach(usersInterest => {
-      if (areInterestsSimilar(volunteerInterest, usersInterest)) {
-        similarInterests.push({ volunteerInterest, usersInterest });
-      }
-    });
-  });
-
-  return similarInterests;
-}
-
-// Register a Volunteer
-router.post('/register', async (req, res) => {
-  const { name, age, gender, address, interests, skills, availability } = req.body;
-
+// ✅ Volunteer Signup Route
+router.post('/signup', async (req, res) => {
   try {
-    const volunteer = new Volunteer({ name, age, gender, address, interests, skills, availability });
+    const { name, email, password, age, gender, address, interests, skills, availability } = req.body;
+
+    // Check if the volunteer already exists
+    const existingVolunteer = await Volunteer.findOne({ email });
+    if (existingVolunteer) {
+      return res.status(400).json({ message: 'Volunteer already exists' });
+    }
+
+    // Hash Password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create new Volunteer
+    const volunteer = new Volunteer({
+      name,
+      email,
+      password: hashedPassword,
+      age,
+      gender,
+      address,
+      interests,
+      skills,
+      availability,
+    });
+
     await volunteer.save();
-    res.status(201).json({ message: 'Volunteer registered successfully!', volunteer });
+    res.status(201).json({ message: 'Volunteer registered successfully!', userId: volunteer._id });
   } catch (err) {
-    res.status(400).json({ error: 'Error registering volunteer', details: err });
+    console.error("Signup Error:", err);
+    res.status(500).json({ error: 'Error registering volunteer', details: err.message });
   }
 });
 
-// Match Volunteer with an Elderly User
-router.post('/match', async (req, res) => {
-  const { volunteerId, usersId } = req.body;
-
+// ✅ Register Volunteer Route (Optional Alternative)
+router.post('/register', async (req, res) => {
   try {
-    const volunteer = await Volunteer.findById(volunteerId);
-    const users = await Users.findById(usersId);
+    const { name, age, gender, address, interests, skills, availability } = req.body;
 
-    if (!volunteer || !users) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+    const volunteer = new Volunteer({ name, age, gender, address, interests, skills, availability });
+    await volunteer.save();
 
-    const commonInterests = getSimilarInterests(volunteer.skills, users.interests);
-    const matchScore = commonInterests.length / volunteer.skills.length;
-
-    res.status(200).json({ matchScore, commonInterests });
+    res.status(201).json({ message: 'Volunteer registered successfully!', volunteer });
   } catch (err) {
-    res.status(400).json({ error: 'Error matching volunteer with elderly', details: err });
+    console.error("Register Error:", err);
+    res.status(400).json({ error: 'Error registering volunteer', details: err.message });
   }
 });
 
