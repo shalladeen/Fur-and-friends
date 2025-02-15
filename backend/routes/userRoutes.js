@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/Users');
 
-// ✅ Get all users (Optionally filter by role)
 router.get('/', async (req, res) => {
   try {
     const { role } = req.query;
@@ -13,7 +12,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ✅ Create a user (Ensure role is provided)
 router.post('/', async (req, res) => {
   try {
     const { name, email, role } = req.body;
