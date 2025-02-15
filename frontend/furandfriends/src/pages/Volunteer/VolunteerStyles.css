@@ -1,24 +1,23 @@
-/* 🔹 Centering Form */
 .volunteer-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   padding: 3em 1.25em 1.25em;
-  margin-top: 2em; /* Add space between navbar and form */
+  margin-top: 2em;
 }
-  
-  /* 🔹 Form Box */
-  .volunteer-box {
-    max-width: 31.25em;
-    max-height: 81.25em;
-    background: #f5fcff;
-    padding: 2.5rem;
-    border-radius: .94em;
-    box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 0.0625em;
-  }
+
+/* Form Box */
+.volunteer-box {
+  max-width: 31.25em;
+  max-height: 81.25em;
+  background: #f5fcff; /* Ensure this is applied */
+  padding: 2.5rem;
+  border-radius: 0.94em;
+  box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 0.0625em;
+}
   
   /* 🔹 Title */
   .volunteer-box h2 {
@@ -30,7 +29,7 @@
   /* 🔹 Description */
   .volunteer-box p {
     font-size: 1rem;
-    color: #5A8FC7; /* Soft Blue */
+    color: #000000; /* Soft Blue */
     margin-bottom: 1.25em;
   }
   
