@@ -18,7 +18,7 @@ const Navbar = () => {
             <Link to="/Connect" className="button-link">Connect</Link>
           </li>
           <li>
-            <Link to="/Volunteer" className="button-link">Volunteer</Link>
+            <Link to="/Volunteer-form" className="button-link">Volunteer</Link>
           </li>
           <li>
             <Link to="/Contact" className="button-link">Contact</Link>

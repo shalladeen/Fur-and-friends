@@ -18,8 +18,16 @@ const VolunteerForm = () => {
     availabilityEnd: '',
   });
 
-  const skillsOptions = ['Cooking', 'Technology Assistance', 'Reading', 'Companionship', 'Exercise Support', 'Pet Care'];
+  const allSkills = [
+    'Cooking', 'Technology Assistance', 'Reading', 'Companionship', 'Exercise Support', 'Pet Care', 'Music',
+    'Teaching', 'Driving', 'Shopping Assistance', 'Event Planning', 'First Aid Training', 'Photography', 'Mental Health Support',
+    'Home Repairs', 'Language Translation', 'Financial Assistance', 'Baking', 'Yoga & Meditation', 'Writing & Storytelling'
+  ];
+
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  const [skillInput, setSkillInput] = useState('');
+  const [filteredSkills, setFilteredSkills] = useState([]);
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -30,11 +38,30 @@ const VolunteerForm = () => {
     }
   };
 
-  const handleSkillSelection = (e) => {
-    const { value, checked } = e.target;
+  const handleSkillInput = (e) => {
+    const value = e.target.value;
+    setSkillInput(value);
+
+    if (value.length > 0) {
+      const filtered = allSkills.filter(skill => skill.toLowerCase().includes(value.toLowerCase()));
+      setFilteredSkills(filtered);
+    } else {
+      setFilteredSkills([]);
+    }
+  };
+
+  const handleSkillSelect = (skill) => {
+    if (!formData.skills.includes(skill)) {
+      setFormData((prev) => ({ ...prev, skills: [...prev.skills, skill] }));
+    }
+    setSkillInput('');
+    setFilteredSkills([]);
+  };
+
+  const handleSkillRemove = (skill) => {
     setFormData((prev) => ({
       ...prev,
-      skills: checked ? [...prev.skills, value] : prev.skills.filter((skill) => skill !== value),
+      skills: prev.skills.filter((s) => s !== skill),
     }));
   };
 
@@ -49,14 +76,14 @@ const VolunteerForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Volunteer Form Submitted:', formData);
-    navigate('/volunteer-motivation', { state: { formData } }); // Navigate to next page
+    navigate('/volunteer-plus', { state: { formData } });
   };
 
   return (
     <div className="volunteer-container">
       <div className="volunteer-box">
-        <h2>🙌 Become a Volunteer</h2>
-        <p>Fill out this form to get started.</p>
+        <h2>🐾 Become a Volunteer</h2>
+        <p>Join our friendly community and bring joy to someone’s life!</p>
 
         <form onSubmit={handleSubmit}>
           <label>First Name:</label>
@@ -82,11 +109,27 @@ const VolunteerForm = () => {
 
           <label>What skills can you offer?</label>
           <div className="skills-section">
-            {skillsOptions.map((skill) => (
-              <label key={skill}>
-                <input type="checkbox" value={skill} onChange={handleSkillSelection} />
-                {skill}
-              </label>
+            <input
+              type="text"
+              value={skillInput}
+              onChange={handleSkillInput}
+              placeholder="Type a skill..."
+            />
+            {filteredSkills.length > 0 && (
+              <ul className="skills-dropdown">
+                {filteredSkills.map((skill) => (
+                  <li key={skill} onClick={() => handleSkillSelect(skill)}>{skill}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Selected Skills Display */}
+          <div className="selected-skills">
+            {formData.skills.map((skill) => (
+              <span key={skill} className="skill-tag">
+                {skill} <button onClick={() => handleSkillRemove(skill)}>✖</button>
+              </span>
             ))}
           </div>
 
@@ -118,7 +161,7 @@ const VolunteerForm = () => {
             </select>
           </div>
 
-          <button type="submit" >Continue</button>
+          <button type="submit">Continue</button>
         </form>
       </div>
     </div>
