@@ -11,18 +11,8 @@ import Login from './pages/Login/Login';
 import Contact from './pages/Contact/Contact';
 import PetRecommendation from './pages/Recommendations/PetRecommendation';
 import './App.css'; 
-import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Signup from "../src/pages/Signup/Signup";
-import ElderlyWelcome from "../src/pages/Welcome/Welcome";
-import VolunteerForm from "../src/pages/Volunteer/VolunteerForm";
-import VolunteerPlus from "../src/pages/Volunteer/VolunteerPlus";
-import Connect from "./pages/Connect/Connect";
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./pages/Login/Login";
-import Contact from "./pages/Contact/Contact";
-import "./App.css"; 
+
 
 const pageVariants = {
   initial: { opacity: 0, y: 50 },
