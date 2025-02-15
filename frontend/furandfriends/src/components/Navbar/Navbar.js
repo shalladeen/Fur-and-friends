@@ -1,15 +1,9 @@
-import React, { useState } from 'react'; // Import useState
-import { Link } from 'react-router-dom'; // Import Link
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../Navbar/Navbar.css';
-import logo from '../Images/Logo.png'; // Ensure the path to the logo is correct
+import logo from '../Images/Logo.png';
 
 const Navbar = () => {
-  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
-
-  const toggleLoginPopup = () => {
-    setLoginPopupOpen(!isLoginPopupOpen);
-  };
-
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -21,41 +15,20 @@ const Navbar = () => {
       <div className="navbar-center">
         <ul className="nav-links">
           <li>
-            <Link to="/signup" className="button-link">Sign Up</Link>
+            <Link to="/Connect" className="button-link">Connect</Link>
           </li>
           <li>
-            <Link to="/welcome-elderly" className="button-link">About Us</Link>
+            <Link to="/Volunteer" className="button-link">Volunteer</Link>
           </li>
           <li>
-            <Link to="/welcome-volunteer" className="button-link">Contact</Link>
+            <Link to="/Contact" className="button-link">Contact</Link>
           </li>
         </ul>
       </div>
       <div className="navbar-right">
-        <button className="login-button button-link" onClick={toggleLoginPopup}>
-          Login
-        </button>
-        {isLoginPopupOpen && (
-          <div className="login-popup">
-            <div className="login-popup-content">
-              <h3>Login</h3>
-              <form>
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" />
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" />
-                <button type="submit">Login</button>
-              </form>
-              <div className="login-popup-links">
-                <Link to="/signup">Create Account</Link>
-                <Link to="/forgot-password">Forgot Password?</Link>
-              </div>
-              <button className="close-popup" onClick={toggleLoginPopup}>
-                &times;
-              </button>
-            </div>
-          </div>
-        )}
+        <Link to="/signup" className="button-link">
+          Sign Up / Login
+        </Link>
       </div>
     </nav>
   );
