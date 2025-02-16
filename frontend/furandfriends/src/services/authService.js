@@ -1,7 +1,9 @@
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+
 export const signup = async (formData) => {
   const endpoint = formData.role === 'elderly'
-    ? 'http://localhost:5001/api/users/signup' 
-    : 'http://localhost:5001/api/volunteers/signup';
+    ? `${BASE_URL}/api/users/signup`
+    : `${BASE_URL}/api/volunteers/signup`;
 
   console.log("📩 Signup Request:", JSON.stringify(formData));
 
