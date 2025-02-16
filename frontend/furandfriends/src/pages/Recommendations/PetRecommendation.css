@@ -1,210 +1,210 @@
 /* 🔹 General Styles */
 body {
-    font-family: system-ui, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* 🔹 Centering Container */
-  .pet-recommendation-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 3em 1.25em 1.25em;
-    margin-top: 2em; /* Add space between navbar and form */
-  }
-  
-  /* 🔹 Recommendation Box */
-  .pet-recommendation-box {
-    max-width: 1200px; /* Wider container for larger screens */
-    width: 100%;
-    background: #EDEDED;
-    padding: 2.5rem;
-    border-radius: 0.94em;
-    box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 0.0625em;
-  }
-  
-  /* 🔹 Title */
-  .pet-recommendation-box h2 {
-    font-size: 2rem;
-    color: #3D3D3D;
-    margin-bottom: 0.625em;
-  }
-  
-  /* 🔹 Subtitle */
-  .pet-recommendation-box .subtitle {
-    font-size: 1rem;
-    color: #5A8FC7; /* Soft Blue */
-    margin-bottom: 1.25em;
-  }
-  
-  /* 🔹 Dropdown Container */
-  .dropdown-container {
-    margin-bottom: 2em;
-  }
-  
-  .animal-type-dropdown {
-    width: 100%;
-    padding: 0.75em;
-    border: 2px solid #5A8FC7;
-    border-radius: 0.5em;
-    font-size: 1rem;
-    color: #3D3D3D;
-    background-color: white;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-  }
-  
-  .animal-type-dropdown:hover {
-    border-color: #4B7BA7;
-  }
-  
-  /* 🔹 Recommended Pets Section */
-  .recommended-pets {
-    margin-top: 2em;
-  }
-  
-  .recommended-pets h3 {
-    font-size: 1.8rem;
-    color: #3D3D3D;
-    margin-bottom: 1em;
-  }
-  
+  font-family: system-ui, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+/* 🔹 Centering Container */
+.pet-recommendation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 3em 1.25em 1.25em;
+  margin-top: 2em; /* Add space between navbar and form */
+}
+
+/* 🔹 Recommendation Box */
+.pet-recommendation-box {
+  max-width: 1200px; /* Wider container for larger screens */
+  width: 100%;
+  background: #f5fcff; /* Light Gray */
+  padding: 2.5rem;
+  border-radius: 0.94em;
+  box-shadow: 0em 0.25em 0.625em rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 0.0625em;
+}
+
+/* 🔹 Title */
+.pet-recommendation-box h2 {
+  font-size: 2rem;
+  color: #3d3d3d; /* Dark Gray */
+  margin-bottom: 0.625em;
+}
+
+/* 🔹 Subtitle */
+.pet-recommendation-box .subtitle {
+  font-size: 1rem;
+  color: #5a8fc7; /* Soft Blue */
+  margin-bottom: 1.25em;
+}
+
+/* 🔹 Dropdown Container */
+.dropdown-container {
+  margin-bottom: 2em;
+}
+
+.animal-type-dropdown {
+  width: 100%;
+  padding: 0.75em;
+  border: 2px solid #5a8fc7; /* Soft Blue */
+  border-radius: 0.5em;
+  font-size: 1rem;
+  color: #3d3d3d; /* Dark Gray */
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.animal-type-dropdown:hover {
+  border-color: #4b7ba7; /* Darker Blue on Hover */
+}
+
+/* 🔹 Recommended Pets Section */
+.recommended-pets {
+  margin-top: 2em;
+}
+
+.recommended-pets h3 {
+  font-size: 1.8rem;
+  color: #3d3d3d; /* Dark Gray */
+  margin-bottom: 1em;
+}
+
+.pet-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
+  gap: 1.5em; /* Space between pet cards */
+}
+
+/* 🔹 Pet Card */
+.pet-card {
+  background: white;
+  padding: 1.5em;
+  border-radius: 0.5em;
+  box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+}
+
+.pet-image {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  object-position: top; /* Focus on the upper half of the image */
+  border-radius: 0.5em;
+  margin-bottom: 1em;
+}
+
+.pet-details h4 {
+  font-size: 1.5rem;
+  color: #5a8fc7; /* Soft Blue */
+  margin-bottom: 0.5em;
+}
+
+.pet-details p {
+  font-size: 1rem;
+  color: #3d3d3d; /* Dark Gray */
+  margin: 0.5em 0;
+}
+
+/* 🔹 Connect Button */
+.connect-button {
+  background: #5a8fc7; /* Soft Blue */
+  color: white;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1em; /* Space above the button */
+}
+
+.connect-button:hover {
+  background: #4b7ba7; /* Darker Blue on Hover */
+}
+
+/* 🔹 No Results Message */
+.no-results {
+  font-size: 1.2rem;
+  color: #3d3d3d; /* Dark Gray */
+  text-align: center;
+}
+
+/* 🔹 Media Queries for Responsiveness */
+@media (max-width: 1024px) {
   .pet-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
-    gap: 1.5em; /* Space between pet cards */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
   }
-  
-  /* 🔹 Pet Card */
+}
+
+@media (max-width: 768px) {
+  .pet-recommendation-box {
+    padding: 1.5rem; /* Smaller padding for tablets */
+  }
+
+  .pet-recommendation-box h2 {
+    font-size: 1.75rem; /* Smaller font size for tablets */
+  }
+
+  .pet-recommendation-box .subtitle {
+    font-size: 0.9rem; /* Smaller font size for tablets */
+  }
+
+  .pet-list {
+    gap: 1em; /* Smaller gap for tablets */
+  }
+
   .pet-card {
-    background: white;
-    padding: 1.5em;
-    border-radius: 0.5em;
-    box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.1);
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1em; /* Smaller padding for tablets */
   }
-  
-  .pet-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
-  }
-  
+
   .pet-image {
-    width: 100%;
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    object-position: top; /* Focus on the upper half of the image */
-    border-radius: 0.5em;
-    margin-bottom: 1em;
+    height: 150px; /* Smaller height for tablets */
   }
-  
-  .pet-details h4 {
-    font-size: 1.5rem;
-    color: #5A8FC7;
-    margin-bottom: 0.5em;
+}
+
+@media (max-width: 480px) {
+  .pet-recommendation-container {
+    padding: 1em; /* Minimal padding for phones */
   }
-  
-  .pet-details p {
-    font-size: 1rem;
-    color: #3D3D3D;
-    margin: 0.5em 0;
+
+  .pet-recommendation-box {
+    padding: 1rem; /* Minimal padding for phones */
   }
-  
-  /* 🔹 Connect Button */
+
+  .pet-recommendation-box h2 {
+    font-size: 1.5rem; /* Smaller font size for phones */
+  }
+
+  .pet-recommendation-box .subtitle {
+    font-size: 0.8rem; /* Smaller font size for phones */
+  }
+
+  .pet-list {
+    grid-template-columns: 1fr; /* 1 column on phones */
+    gap: 1em; /* Smaller gap for phones */
+  }
+
+  .pet-card {
+    padding: 1em; /* Smaller padding for phones */
+  }
+
+  .pet-image {
+    height: 120px; /* Smaller height for phones */
+  }
+
   .connect-button {
-    background: #5A8FC7;
-    color: white;
-    padding: 0.5em 1em;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.5em;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-top: 1em; /* Space above the button */
+    font-size: 0.9rem; /* Smaller font size for phones */
+    padding: 0.4em 0.8em;
   }
-  
-  .connect-button:hover {
-    background: #4B7BA7;
-  }
-  
-  /* 🔹 No Results Message */
-  .no-results {
-    font-size: 1.2rem;
-    color: #3D3D3D;
-    text-align: center;
-  }
-  
-  /* 🔹 Media Queries for Responsiveness */
-  @media (max-width: 1024px) {
-    .pet-list {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .pet-recommendation-box {
-      padding: 1.5rem; /* Smaller padding for tablets */
-    }
-  
-    .pet-recommendation-box h2 {
-      font-size: 1.75rem; /* Smaller font size for tablets */
-    }
-  
-    .pet-recommendation-box .subtitle {
-      font-size: 0.9rem; /* Smaller font size for tablets */
-    }
-  
-    .pet-list {
-      gap: 1em; /* Smaller gap for tablets */
-    }
-  
-    .pet-card {
-      padding: 1em; /* Smaller padding for tablets */
-    }
-  
-    .pet-image {
-      height: 150px; /* Smaller height for tablets */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .pet-recommendation-container {
-      padding: 1em; /* Minimal padding for phones */
-    }
-  
-    .pet-recommendation-box {
-      padding: 1rem; /* Minimal padding for phones */
-    }
-  
-    .pet-recommendation-box h2 {
-      font-size: 1.5rem; /* Smaller font size for phones */
-    }
-  
-    .pet-recommendation-box .subtitle {
-      font-size: 0.8rem; /* Smaller font size for phones */
-    }
-  
-    .pet-list {
-      grid-template-columns: 1fr; /* 1 column on phones */
-      gap: 1em; /* Smaller gap for phones */
-    }
-  
-    .pet-card {
-      padding: 1em; /* Smaller padding for phones */
-    }
-  
-    .pet-image {
-      height: 120px; /* Smaller height for phones */
-    }
-  
-    .connect-button {
-      font-size: 0.9rem; /* Smaller font size for phones */
-      padding: 0.4em 0.8em;
-    }
-  }
+}
