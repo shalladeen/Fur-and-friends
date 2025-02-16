@@ -3,10 +3,13 @@ const bcrypt = require('bcrypt');
 const Volunteer = require('../models/Volunteer');
 const router = express.Router();
 
-// ✅ Volunteer Signup Route
 router.post('/signup', async (req, res) => {
   try {
     const { name, email, password, age, gender, address, interests, skills, availability } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
 
     // Check if the volunteer already exists
     const existingVolunteer = await Volunteer.findOne({ email });
@@ -22,13 +25,13 @@ router.post('/signup', async (req, res) => {
     const volunteer = new Volunteer({
       name,
       email,
-      password: hashedPassword,
+      password: hashedPassword, // Store hashed password
       age,
       gender,
       address,
-      interests,
-      skills,
-      availability,
+      interests: interests || [],
+      skills: skills || [],
+      availability: availability || []
     });
 
     await volunteer.save();
@@ -36,21 +39,6 @@ router.post('/signup', async (req, res) => {
   } catch (err) {
     console.error("Signup Error:", err);
     res.status(500).json({ error: 'Error registering volunteer', details: err.message });
-  }
-});
-
-// ✅ Register Volunteer Route (Optional Alternative)
-router.post('/register', async (req, res) => {
-  try {
-    const { name, age, gender, address, interests, skills, availability } = req.body;
-
-    const volunteer = new Volunteer({ name, age, gender, address, interests, skills, availability });
-    await volunteer.save();
-
-    res.status(201).json({ message: 'Volunteer registered successfully!', volunteer });
-  } catch (err) {
-    console.error("Register Error:", err);
-    res.status(400).json({ error: 'Error registering volunteer', details: err.message });
   }
 });
 

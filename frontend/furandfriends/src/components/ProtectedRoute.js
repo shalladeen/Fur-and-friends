@@ -1,10 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = !!localStorage.getItem("token"); // ✅ Ensure token exists
+const ProtectedRoute = ({ children, allowIfSignedUp = false }) => {
+    const isAuthenticated = localStorage.getItem("userToken");
+    const isSignedUp = localStorage.getItem("userId"); // Check if user just signed up
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+    if (isAuthenticated || (allowIfSignedUp && isSignedUp)) {
+        return children;
+    }
+
+    return <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
