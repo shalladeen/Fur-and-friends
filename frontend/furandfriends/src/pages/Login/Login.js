@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
     try {
       const response = await fetch('http://localhost:5001/api/login', {
         method: 'POST',
@@ -23,16 +23,31 @@ const Login = () => {
   
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        navigate('/');
-        window.location.reload(); // ✅ Refreshes UI after login
+        localStorage.setItem('userId', data.userId);  // ✅ Store user ID
+        localStorage.setItem('role', data.role);      // ✅ Store user role
+        console.log("✅ Role stored:", data.role);
+  
+        if (data.role === 'volunteer') {
+          navigate('/volunteer-form');
+        } else if (data.role === 'elderly') {
+          navigate('/connect');
+        } else {
+          navigate('/');
+        }
+  
+        window.location.reload();
       } else {
         alert(data.message || "Login failed");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("🚨 Login error:", error);
       alert("An error occurred. Please try again.");
     }
   };
+  
+  
+  
+  
   
 
   return (

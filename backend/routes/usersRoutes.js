@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
       name, 
       email, 
       password: hashedPassword, 
-      role, // ✅ Ensure role is saved
+      role,
       age, 
       gender, 
       address, 
@@ -75,6 +75,35 @@ router.post('/register', async (req, res) => {
     res.status(400).json({ error: 'Error registering user', details: err.message });
   }
 });
+
+router.put('/update/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("🔍 Received Update Request for User ID:", id);
+
+    // Check if the user exists
+    const existingUser = await Users.findById(id);
+    if (!existingUser) {
+      console.error("❌ User Not Found in Database:", id);
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    console.log("✅ User Exists:", existingUser);
+
+    // Update user
+    const updatedData = req.body;
+    const updatedUser = await Users.findByIdAndUpdate(id, updatedData, { new: true });
+
+    console.log("✅ User Updated Successfully:", updatedUser);
+
+    res.status(200).json({ message: 'User updated successfully', updatedUser });
+  } catch (error) {
+    console.error("🚨 Error Updating User:", error);
+    res.status(500).json({ message: 'Error updating user', error: error.message });
+  }
+});
+
+
 
 module.exports = router;
 

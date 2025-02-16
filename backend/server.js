@@ -11,6 +11,7 @@ const petRoutes = require('./routes/petRoutes');
 const usersRoutes = require('./routes/usersRoutes');
 
 const User = require('./models/Users');
+const Volunteer = require('./models/Volunteer');
 
 const app = express();
 
@@ -24,35 +25,6 @@ mongoose.connect(process.env.DB_URI, {
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-  app.post('/api/register', async (req, res) => {
-    try {
-      const { email, password, name, role } = req.body;
-  
-      console.log("Incoming Request Data:", req.body);
-  
-      // Check if email exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) return res.status(400).json({ message: "User already exists " });
-  
-      if (!password) return res.status(400).json({ message: "Password is required" });
-  
-      // Hash the password before saving
-      const hashedPassword = await bcrypt.hash(password, 10);
-  
-      // Save user with hashed password
-      const newUser = new User({ name, email, password: hashedPassword, role });
-      await newUser.save();
-  
-      console.log(" User Registered Successfully:", newUser);
-      res.json({ message: "User registered successfully " });
-  
-    } catch (error) {
-      console.error(" Error in Registration:", error);
-      res.status(500).json({ message: "Server error" });
-    }
-  });
-  
-
   app.post('/api/login', async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -61,53 +33,50 @@ mongoose.connect(process.env.DB_URI, {
         return res.status(400).json({ message: "Email and password are required" });
       }
   
-      console.log("📩 Login Request Data:", req.body);
-  
-      // Find user by email
-      const user = await User.findOne({ email });
+      let user = await User.findOne({ email });
   
       if (!user) {
-        console.error("❌ User not found:", email);
+        user = await Volunteer.findOne({ email });
+      }
+  
+      if (!user) {
         return res.status(400).json({ message: "User not found" });
       }
   
-      // Ensure user has a password stored
       if (!user.password) {
-        console.error("⚠ User record is missing a password field:", user);
         return res.status(400).json({ message: "Password field missing, try resetting your password" });
       }
   
-      // Compare hashed passwords
       const isValidPassword = await bcrypt.compare(password, user.password);
   
       if (!isValidPassword) {
-        console.error("❌ Invalid password for user:", email);
         return res.status(400).json({ message: "Invalid password" });
       }
   
-      // Generate a JWT Token
+      // ✅ Ensure correct role is retrieved
+      const role = user.role || (user instanceof Volunteer ? "volunteer" : "elderly");
+  
       const token = jwt.sign(
-        { id: user._id, email: user.email, role: user.role },
+        { id: user._id, email: user.email, role },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );
   
-      console.log("✅ Login Successful for:", user.email);
-      
-      res.json({ message: "Login successful", token, role: user.role });
+      console.log("✅ Login Successful:", { email: user.email, role, userId: user._id });
+  
+      res.json({ 
+        message: "Login successful", 
+        token, 
+        role, 
+        userId: user._id  
+      });
   
     } catch (error) {
-      console.error("🚨 Error in Login:", error);
       res.status(500).json({ message: "Server error", error: error.message });
     }
   });
   
-
   
-  
-  
-
-
 
 const authenticate = (req, res, next) => {
   const token = req.header('Authorization');
