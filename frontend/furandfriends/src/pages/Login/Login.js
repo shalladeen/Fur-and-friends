@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
     try {
       const response = await fetch('http://localhost:5001/api/login', {
         method: 'POST',
@@ -20,11 +20,26 @@ const Login = () => {
       });
   
       const data = await response.json();
+      console.log("Login Response Data:", data); // ✅ Debugging
   
       if (response.ok) {
+        if (!data.role) {
+          alert("Login successful but no role found. Please check the database.");
+          return;
+        }
+  
         localStorage.setItem('token', data.token);
-        navigate('/');
-        window.location.reload(); // ✅ Refreshes UI after login
+        localStorage.setItem('role', data.role);
+  
+        if (data.role === 'volunteer') {
+          navigate('/volunteer-form');
+        } else if (data.role === 'elderly') {
+          navigate('/connect');
+        } else {
+          navigate('/');
+        }
+  
+        window.location.reload();
       } else {
         alert(data.message || "Login failed");
       }
@@ -33,6 +48,8 @@ const Login = () => {
       alert("An error occurred. Please try again.");
     }
   };
+  
+  
   
 
   return (

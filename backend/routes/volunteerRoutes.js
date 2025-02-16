@@ -21,11 +21,12 @@ router.post('/signup', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create new Volunteer
+    // Create new Volunteer with ROLE
     const volunteer = new Volunteer({
       name,
       email,
       password: hashedPassword, // Store hashed password
+      role: "volunteer",  // ✅ Ensure role is set
       age,
       gender,
       address,
@@ -35,6 +36,8 @@ router.post('/signup', async (req, res) => {
     });
 
     await volunteer.save();
+    console.log("✅ Volunteer Registered Successfully:", volunteer);
+
     res.status(201).json({ message: 'Volunteer registered successfully!', userId: volunteer._id });
   } catch (err) {
     console.error("Signup Error:", err);
