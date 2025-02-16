@@ -37,6 +37,11 @@ const Navbar = () => {
           <img src={logo} alt="Fur and Friends Logo" className="logo-img" />
         </Link>
         <span className="logo-text">Fur & Friends</span>
+        
+        {/* Paw Prints Animation */}
+        <div className="paw-prints">
+          🐾
+        </div>
       </div>
 
       <div className="menu-icon" onClick={toggleMenu}>
