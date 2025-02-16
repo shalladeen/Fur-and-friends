@@ -18,31 +18,48 @@ const Signup = () => {
     e.preventDefault();
     setError('');
 
-    console.log("Submitting Form Data:", formData);
-
     if (!formData.email || !formData.password || !formData.name || !formData.role) {
-      setError('All fields are required');
-      console.error("Form validation failed: Missing required fields");
-      return;
+        setError('All fields are required');
+        return;
     }
 
     try {
-      console.log("Attempting Signup...");
-      const data = await signup(formData);
-      console.log("Signup Response:", data);
+        const data = await signup({
+            name: formData.name,
+            email: formData.email,  // Ensure email is sent
+            password: formData.password,
+            role: formData.role,
+            age: formData.age || null, 
+            gender: formData.gender || null,
+            address: formData.address || null,
+            interests: formData.interests || [],
+            skills: formData.skills || [],
+            availability: formData.availability || []
+        });
 
-      if (data.userId) {
-        localStorage.setItem('userId', data.userId);
-        console.log("Signup successful, navigating to:", formData.role === 'elderly' ? '/welcome-elderly' : '/welcome-volunteer');
-        navigate(formData.role === 'elderly' ? '/welcome-elderly' : '/welcome-volunteer');
-      } else {
-        setError(data.message || 'Signup failed. Try again.');
-      }
+        console.log("✅ Signup Response:", data);
+
+        if (data.userId) {
+            localStorage.setItem('userId', data.userId);
+            localStorage.setItem('userRole', formData.role);
+
+            if (formData.role === 'volunteer') {
+                navigate('/volunteer-form');
+            } else {
+                navigate('/connect');
+            }
+        } else {
+            setError(data.message || 'Signup failed. Try again.');
+        }
     } catch (error) {
-      console.error("Request failed:", error);
-      setError('Something went wrong. Please try again.');
+        console.error("🚨 Request failed:", error);
+        setError('Something went wrong. Please try again.');
     }
-  };
+};
+
+
+
+  
 
   return (
     <div className="auth-container">

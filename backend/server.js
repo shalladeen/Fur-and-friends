@@ -63,6 +63,7 @@ mongoose.connect(process.env.DB_URI, {
   
       console.log("📩 Login Request Data:", req.body);
   
+      // Find user by email
       const user = await User.findOne({ email });
   
       if (!user) {
@@ -70,11 +71,13 @@ mongoose.connect(process.env.DB_URI, {
         return res.status(400).json({ message: "User not found" });
       }
   
+      // Ensure user has a password stored
       if (!user.password) {
         console.error("⚠ User record is missing a password field:", user);
         return res.status(400).json({ message: "Password field missing, try resetting your password" });
       }
   
+      // Compare hashed passwords
       const isValidPassword = await bcrypt.compare(password, user.password);
   
       if (!isValidPassword) {
@@ -82,20 +85,24 @@ mongoose.connect(process.env.DB_URI, {
         return res.status(400).json({ message: "Invalid password" });
       }
   
+      // Generate a JWT Token
       const token = jwt.sign(
-        { id: user._id, email: user.email },
+        { id: user._id, email: user.email, role: user.role },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );
   
       console.log("✅ Login Successful for:", user.email);
-      res.json({ message: "Login successful", token });
+      
+      res.json({ message: "Login successful", token, role: user.role });
   
     } catch (error) {
       console.error("🚨 Error in Login:", error);
       res.status(500).json({ message: "Server error", error: error.message });
     }
   });
+  
+
   
   
   
