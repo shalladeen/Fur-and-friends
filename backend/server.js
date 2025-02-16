@@ -25,48 +25,58 @@ mongoose.connect(process.env.DB_URI, {
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-app.post('/api/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+  app.post('/api/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required" });
+      }
+  
+      let user = await User.findOne({ email });
+  
+      if (!user) {
+        user = await Volunteer.findOne({ email });
+      }
+  
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+  
+      if (!user.password) {
+        return res.status(400).json({ message: "Password field missing, try resetting your password" });
+      }
+  
+      const isValidPassword = await bcrypt.compare(password, user.password);
+  
+      if (!isValidPassword) {
+        return res.status(400).json({ message: "Invalid password" });
+      }
+  
+      // ✅ Ensure correct role is retrieved
+      const role = user.role || (user instanceof Volunteer ? "volunteer" : "elderly");
+  
+      const token = jwt.sign(
+        { id: user._id, email: user.email, role },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      );
+  
+      console.log("✅ Login Successful:", { email: user.email, role, userId: user._id });
+  
+      res.json({ 
+        message: "Login successful", 
+        token, 
+        role, 
+        userId: user._id  
+      });
+  
+    } catch (error) {
+      res.status(500).json({ message: "Server error", error: error.message });
     }
-
-    let user = await User.findOne({ email });
-
-    if (!user) {
-      user = await Volunteer.findOne({ email });
-    }
-
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    if (!user.password) {
-      return res.status(400).json({ message: "Password field missing, try resetting your password" });
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (!isValidPassword) {
-      return res.status(400).json({ message: "Invalid password" });
-    }
-
-    const role = user.role || "volunteer";
-
-    const token = jwt.sign(
-      { id: user._id, email: user.email, role },
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' }
-    );
-
-    res.json({ message: "Login successful", token, role });
-
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
+  });
+  
+  
 
 const authenticate = (req, res, next) => {
   const token = req.header('Authorization');

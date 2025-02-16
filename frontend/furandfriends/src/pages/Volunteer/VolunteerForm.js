@@ -73,11 +73,35 @@ const VolunteerForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Volunteer Form Submitted:', formData);
-    navigate('/volunteer-plus', { state: { formData } });
+    const token = localStorage.getItem('token'); // Retrieve user token
+    const userId = localStorage.getItem('userId'); // Retrieve user ID
+  
+    try {
+      const response = await fetch(`http://localhost:5001/api/volunteers/update/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert("Profile updated successfully!");
+        navigate('/volunteer-plus');
+      } else {
+        alert(data.message || "Failed to update profile.");
+      }
+    } catch (error) {
+      console.error("Update error:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
+  
 
   return (
     <div className="volunteer-container">
