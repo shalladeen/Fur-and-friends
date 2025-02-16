@@ -139,12 +139,6 @@ const PetRecommendation = () => {
     },
   ];
 
-  // Simulate fetching data from a database (useEffect)
-  useEffect(() => {
-    // Replace this with an API call to fetch pets from your database
-    setPets(mockDatabase);
-  }, []);
-
   // Handle animal type selection
   const handleAnimalTypeChange = (event) => {
     const selectedType = event.target.value;
