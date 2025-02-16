@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
       name, 
       email, 
       password: hashedPassword, 
-      role, // ✅ Ensure role is saved
+      role,
       age, 
       gender, 
       address, 
