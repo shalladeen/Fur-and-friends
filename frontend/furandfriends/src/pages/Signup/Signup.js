@@ -10,9 +10,13 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log("Updated Form Data:", formData);
+    setFormData(prevState => {
+      const updatedState = { ...prevState, [e.target.name]: e.target.value };
+      console.log("Updated Form Data:", updatedState); // ✅ Logs the correct state
+      return updatedState;
+    });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

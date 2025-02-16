@@ -1,17 +1,16 @@
 const mongoose = require('mongoose');
 
-const volunteerSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }, // Ensure this is collected
-    age: Number,
-    gender: String,
-    address: String,
-    interests: [String],
-    availability: [String],
-    skills: [String],
-    createdAt: { type: Date, default: Date.now }
+const VolunteerSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, required: true }, // ✅ Ensure role is included
+  age: { type: Number },
+  gender: { type: String },
+  address: { type: String },
+  interests: { type: [String], default: [] },
+  skills: { type: [String], default: [] },
+  availability: { type: [String], default: [] }
 });
 
-const Volunteer = mongoose.model('Volunteer', volunteerSchema);
-module.exports = Volunteer;
+module.exports = mongoose.model('Volunteer', VolunteerSchema);

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/signup', async (req, res) => {
   try {
-    const { name, email, password, age, gender, address, interests, skills, availability } = req.body;
+    const { name, email, password, age, gender, address, interests, skills, role, availability } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required' });
@@ -26,7 +26,7 @@ router.post('/signup', async (req, res) => {
       name,
       email,
       password: hashedPassword, // Store hashed password
-      role: "volunteer",  // ✅ Ensure role is set
+      role,
       age,
       gender,
       address,
@@ -42,6 +42,25 @@ router.post('/signup', async (req, res) => {
   } catch (err) {
     console.error("Signup Error:", err);
     res.status(500).json({ error: 'Error registering volunteer', details: err.message });
+  }
+});
+
+router.put('/update/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("Updating volunteer with ID:", id);
+
+    const updatedData = req.body;
+    const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, updatedData, { new: true });
+
+    if (!updatedVolunteer) {
+      return res.status(404).json({ message: 'Volunteer not found' });
+    }
+
+    res.status(200).json({ message: 'Volunteer updated successfully', updatedVolunteer });
+  } catch (error) {
+    console.error("Error updating volunteer:", error);
+    res.status(500).json({ message: 'Error updating volunteer', error: error.message });
   }
 });
 
