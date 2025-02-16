@@ -11,26 +11,29 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
       const response = await fetch('http://localhost:5001/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         localStorage.setItem('token', data.token);
         navigate('/');
+        window.location.reload(); // ✅ Refreshes UI after login
       } else {
-        alert(data.message);
+        alert(data.message || "Login failed");
       }
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      console.error("Login error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
+  
 
   return (
     <div className="auth-container">
