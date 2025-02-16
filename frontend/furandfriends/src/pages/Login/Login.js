@@ -20,16 +20,12 @@ const Login = () => {
       });
   
       const data = await response.json();
-      console.log("Login Response Data:", data); // ✅ Debugging
   
       if (response.ok) {
-        if (!data.role) {
-          alert("Login successful but no role found. Please check the database.");
-          return;
-        }
-  
         localStorage.setItem('token', data.token);
-        localStorage.setItem('role', data.role);
+        localStorage.setItem('userId', data.userId);  // ✅ Store user ID
+        localStorage.setItem('role', data.role);      // ✅ Store user role
+        console.log("✅ Role stored:", data.role);
   
         if (data.role === 'volunteer') {
           navigate('/volunteer-form');
@@ -44,10 +40,12 @@ const Login = () => {
         alert(data.message || "Login failed");
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("🚨 Login error:", error);
       alert("An error occurred. Please try again.");
     }
   };
+  
+  
   
   
   

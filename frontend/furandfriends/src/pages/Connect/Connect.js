@@ -71,16 +71,53 @@ const Connect = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data Submitted:', formData);
-
-    if (formData.companionType === 'volunteer') {
-      navigate('/volunteer-recommendations', { state: formData });
-    } else if (formData.companionType === 'pet') {
-      navigate('/Pet-Recommendation', { state: formData });
+    const token = localStorage.getItem('token'); 
+    const userId = localStorage.getItem('userId'); 
+    const role = localStorage.getItem('role');  // ✅ Retrieve role
+  
+    if (!userId) {
+      console.error("❌ No userId found in localStorage.");
+      alert("User ID not found. Please log in again.");
+      return;
+    }
+  
+    console.log("🛠 Updating user with ID:", userId, "Stored Role:", role);
+  
+    let endpoint = role === 'volunteer' 
+      ? `http://localhost:5001/api/volunteers/update/${userId}`
+      : `http://localhost:5001/api/users/update/${userId}`;
+  
+    try {
+      const response = await fetch(endpoint, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+      console.log("✅ Update Response:", data);
+  
+      if (response.ok) {
+        alert("Profile updated successfully!");
+        navigate(role === 'volunteer' ? '/volunteer-plus' : '/volunteer-recommendations');
+      } else {
+        console.error("❌ Update failed:", data);
+        alert(data.message || "Failed to update profile.");
+      }
+    } catch (error) {
+      console.error("🚨 Update error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
+  
+  
+  
+  
 
   return (
     <div className="connect-container">
