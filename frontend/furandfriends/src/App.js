@@ -44,10 +44,13 @@ const AnimatedRoutes = () => {
         } />
 
         <Route path="/volunteer-form" element={
-          <ProtectedRoute allowIfSignedUp={true}>
-            <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit"><VolunteerForm /></motion.div>
+          <ProtectedRoute allowIfSignedUp={true}>  {/* 🔥 Allow access without token */}
+            <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+              <VolunteerForm />
+            </motion.div>
           </ProtectedRoute>
         } />
+
 
         <Route path="/volunteer-plus" element={
           <ProtectedRoute allowIfSignedUp={true}>

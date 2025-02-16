@@ -44,17 +44,24 @@ const Signup = () => {
         console.log("✅ Signup Response:", data);
 
         if (data.userId) {
-            localStorage.setItem('userId', data.userId);
-            localStorage.setItem('userRole', formData.role);
-
-            if (formData.role === 'volunteer') {
-                navigate('/volunteer-form');
-            } else {
-                navigate('/connect');
-            }
-        } else {
-            setError(data.message || 'Signup failed. Try again.');
-        }
+          localStorage.setItem('userId', data.userId);
+          localStorage.setItem('userRole', formData.role);
+          
+          if (data.token) { // 🔥 Store token if the API returns one
+              localStorage.setItem('token', data.token);
+          }
+      
+          console.log("✅ Successfully signed up, redirecting...");
+          if (formData.role === 'volunteer') {
+              navigate('/volunteer-form');
+          } else {
+              navigate('/connect');
+          }
+      } else {
+          setError(data.message || 'Signup failed. Try again.');
+      }
+      
+      
     } catch (error) {
         console.error("🚨 Request failed:", error);
         setError('Something went wrong. Please try again.');

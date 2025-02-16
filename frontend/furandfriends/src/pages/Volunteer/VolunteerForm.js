@@ -26,6 +26,9 @@ const VolunteerForm = () => {
 
   const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+  const [skillInput, setSkillInput] = useState('');
+  const [filteredSkills, setFilteredSkills] = useState([]);
+
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     if (type === 'file') {
@@ -43,11 +46,41 @@ const VolunteerForm = () => {
     }));
   };
 
+  // ✅ Filter skills based on user input
+  const handleSkillInputChange = (e) => {
+    const value = e.target.value;
+    setSkillInput(value);
+
+    if (value.length > 0) {
+      const filtered = allSkills.filter(skill => skill.toLowerCase().includes(value.toLowerCase()));
+      setFilteredSkills(filtered);
+    } else {
+      setFilteredSkills([]);
+    }
+  };
+
+  // ✅ Select skill from dropdown
+  const handleSkillSelect = (skill) => {
+    if (!formData.skills.includes(skill)) {
+      setFormData((prev) => ({ ...prev, skills: [...prev.skills, skill] }));
+    }
+    setSkillInput('');
+    setFilteredSkills([]);
+  };
+
+  // ✅ Remove a selected skill
+  const removeSkill = (skill) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills: prev.skills.filter((s) => s !== skill),
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
-    const role = localStorage.getItem('role'); 
+    const userRole = localStorage.getItem('userRole');
 
     if (!userId) {
       console.error("❌ No userId found in localStorage.");
@@ -55,10 +88,10 @@ const VolunteerForm = () => {
       return;
     }
 
-    console.log("🛠 Updating volunteer with ID:", userId, "Stored Role:", role);
+    console.log("🛠 Updating volunteer with ID:", userId, "Stored Role:", userRole);
 
-    let endpoint = role === 'volunteer' 
-      ? `http://localhost:5001/api/volunteers/update/${userId}` 
+    const endpoint = userRole === 'volunteer'
+      ? `http://localhost:5001/api/volunteers/update/${userId}`
       : `http://localhost:5001/api/users/update/${userId}`;
 
     try {
@@ -76,6 +109,7 @@ const VolunteerForm = () => {
 
       if (response.ok) {
         alert("Profile updated successfully!");
+        console.log("🚀 Redirecting to next step...");
         navigate('/volunteer-plus'); 
       } else {
         console.error("❌ Update failed:", data);
@@ -114,6 +148,33 @@ const VolunteerForm = () => {
 
           <label>Upload ID Proof:</label>
           <input type="file" name="idProof" accept="image/*,application/pdf" onChange={handleChange} required />
+
+          {/* ✅ Skills Input with Dropdown Suggestions */}
+          <label>What skills can you offer?</label>
+          <div className="skill-section">
+            <input
+              type="text"
+              value={skillInput}
+              onChange={handleSkillInputChange}
+              placeholder="Type a skill..."
+            />
+            {filteredSkills.length > 0 && (
+              <ul className="skill-dropdown">
+                {filteredSkills.map((skill) => (
+                  <li key={skill} onClick={() => handleSkillSelect(skill)}>{skill}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* ✅ Display selected skills as removable tags */}
+          <div className="selected-skills">
+            {formData.skills.map((skill) => (
+              <span key={skill} className="skill-tag">
+                {skill} <button onClick={() => removeSkill(skill)}>✖</button>
+              </span>
+            ))}
+          </div>
 
           <label>Availability:</label>
           <div className="availability-days">
