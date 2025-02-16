@@ -9,6 +9,8 @@ require('dotenv').config();
 const volunteerRoutes = require('./routes/volunteerRoutes');
 const petRoutes = require('./routes/petRoutes');
 const usersRoutes = require('./routes/usersRoutes');
+const matchRoutes = require('./routes/matchRoutes');
+
 
 const User = require('./models/Users');
 const Volunteer = require('./models/Volunteer');
@@ -98,6 +100,8 @@ app.get('/api/protected', authenticate, (req, res) => {
 app.use('/api/volunteers', volunteerRoutes);
 app.use('/api/pets', petRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api', matchRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to Fur and Friends API');
