@@ -10,7 +10,7 @@ router.post('/signup', async (req, res) => {
 
     const { name, email, password, role, age, gender, address, interests, skills, availability } = req.body;
 
-    // ✅ Check if the `role` field is provided
+    // ✅ Check if the role field is provided
     if (!role) {
       return res.status(400).json({ message: "Role is required." });
     }
@@ -77,3 +77,4 @@ router.post('/register', async (req, res) => {
 });
 
 module.exports = router;
+
