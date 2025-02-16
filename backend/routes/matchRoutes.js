@@ -1,53 +1,67 @@
 const express = require('express');
-const axios = require('axios');
-const Users = require('../models/Users');
-const Volunteer = require('../models/Volunteer');
-
 const router = express.Router();
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const Volunteer = require('../models/Volunteer');
+const Users = require('../models/Users');
+const OpenAI = require("openai");
 
-const getDistance = async (origin, destination) => {
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}&key=${GOOGLE_MAPS_API_KEY}`;
-  const response = await axios.get(url);
-  
-  if (response.data.status === "OK") {
-    return response.data.rows[0].elements[0].distance.value; // Distance in meters
-  } else {
-    throw new Error("Could not calculate distance");
-  }
-};
+// ✅ Initialize OpenAI
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-router.get('/match', async (req, res) => {
+// ✅ AI Matching Route
+router.get('/match-ai/:elderlyId', async (req, res) => {
   try {
-    const users = await Users.find();
-    const volunteers = await Volunteer.find();
+    const { elderlyId } = req.params;
+    const elderlyUser = await Users.findById(elderlyId);
 
-    let matches = [];
-
-    for (const user of users) {
-      let bestMatch = null;
-      let bestScore = Infinity;
-
-      for (const volunteer of volunteers) {
-        const distance = await getDistance(user.address, volunteer.address);
-        const sharedInterests = user.interests.filter(i => volunteer.interests.includes(i)).length;
-
-        const score = distance - (sharedInterests * 5000); // Adjust weight of interests
-
-        if (score < bestScore) {
-          bestScore = score;
-          bestMatch = volunteer;
-        }
-      }
-
-      matches.push({ user, bestMatch });
+    if (!elderlyUser) {
+      return res.status(404).json({ message: 'Elderly user not found' });
     }
 
-    res.json({ matches });
+    // Fetch all volunteers
+    const volunteers = await Volunteer.find();
 
-  } catch (err) {
-    console.error("Matching Error:", err);
-    res.status(500).json({ error: 'Error finding matches', details: err.message });
+    if (volunteers.length === 0) {
+      return res.status(404).json({ message: 'No volunteers available' });
+    }
+
+    // ✅ Create AI Prompt
+    const prompt = `
+      You are an intelligent matching system for a volunteer program.
+      An elderly user needs a volunteer based on interests and availability.
+
+      **Elderly User Info**:
+      - Name: ${elderlyUser.name}
+      - Interests: ${elderlyUser.interests.join(", ") || "None specified"}
+      - Availability: ${elderlyUser.availability.join(", ") || "No availability provided"}
+
+      **Volunteers Available**:
+      ${volunteers.map(vol => `
+        - Name: ${vol.name}
+        - Skills: ${vol.skills.join(", ") || "None"}
+        - Availability: ${vol.availability.join(", ") || "No availability provided"}
+      `).join("\n")}
+
+      Who would be the best match for this elderly user and why? Provide only the volunteer's name and a brief reason.
+    `;
+
+    console.log("🔹 AI Prompt:\n", prompt);
+
+    // ✅ Call OpenAI API
+    const response = await openai.completions.create({
+      model: "gpt-3.5-turbo",
+      prompt: prompt,
+      max_tokens: 150,
+    });
+
+    const aiResponse = response.choices[0].text.trim();
+    console.log("✅ AI Match Found:", aiResponse);
+
+    res.json({ match: aiResponse });
+  } catch (error) {
+    console.error("🚨 AI Matching Error:", error);
+    res.status(500).json({ message: 'Error finding match', error: error.message });
   }
 });
 
